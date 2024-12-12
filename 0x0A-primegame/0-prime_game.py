@@ -15,7 +15,7 @@ def seive(n):
 def isWinner(x, nums):
     """Prime Game"""
 
-    if x == 0 or not nums:
+    if x < 1 or not nums:
         return None
     n = max(nums)
     primes = seive(n)
