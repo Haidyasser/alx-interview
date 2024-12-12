@@ -2,36 +2,28 @@
 """Prime Game"""
 
 
-def isPrime(n):
-    """check if a number is prime"""
-    if n <= 1:
-        return False
-    if n == 2:
-        return True
-    for i in range(2, n):
-        if n % i == 0:
-            return False
-    return True
+def seive(n):
+    prime = [True for i in range(n+1)]
+    for i in range(2, n+1):
+        if prime[i]:
+            for j in range(i*i, n+1, i):
+                prime[j] = False
+    return prime
 
 
 def isWinner(x, nums):
-    """Prime Game"""
-    if x < 1 or nums is None:
+    if x == 0 or not nums:
         return None
+    n = max(nums)
+    primes = seive(n)
 
-    maria = 0
-    ben = 0
-    for n in nums:
-        mariaWin = False
-        for i in range(1, n+1):
-            if isPrime(i):
-                mariaWin = not mariaWin
-        if mariaWin:
-            maria += 1
-        else:
+    maria = ben = 0
+    for i in nums:
+        primes_count = sum(primes[:i+1])
+        if primes_count % 2 == 0:
             ben += 1
-    if maria > ben:
-        return "Maria"
-    if maria < ben:
-        return "Ben"
-    return None
+        else:
+            maria += 1
+    if maria == ben:
+        return None
+    return "Maria" if maria > ben else "Ben"
