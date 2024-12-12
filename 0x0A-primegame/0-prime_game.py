@@ -3,6 +3,7 @@
 
 
 def seive(n):
+    """Sieve of Eratosthenes"""
     prime = [True for i in range(n+1)]
     for i in range(2, n+1):
         if prime[i]:
@@ -12,6 +13,8 @@ def seive(n):
 
 
 def isWinner(x, nums):
+    """Prime Game"""
+
     if x == 0 or not nums:
         return None
     n = max(nums)
